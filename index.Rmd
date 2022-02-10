@@ -1,0 +1,34 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 3
+    smooth_scroll: false
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+library(knitr)
+```
+
+# Number of peaks per cutoff - broad peakcalling
+
+```{python include = FALSE}
+import pandas as pd
+df = pd.DataFrame({"FDR cutoff" : [0.1,0.05,0.01],
+                  "# of Peaks" : [74783,12314,12312]
+})
+print(df.to_markdown(index = False))
+```
+
+```{r echo = FALSE}
+kable(py$df)
+```

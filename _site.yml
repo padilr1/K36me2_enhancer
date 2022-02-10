@@ -1,0 +1,7 @@
+name: ""
+navbar:
+  title: "HNSCC ChIP-seq"
+  left:
+    - text: "Exploratory"
+      href: index.html
+output_dir: "docs"
