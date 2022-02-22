@@ -17,18 +17,114 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 library(reticulate)
 library(knitr)
+library(ChIPseeker)
+library(AnnotationDbi)
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(org.Mm.eg.db)
+library(dplyr)
+library(reactable)
+library(data.table)
 ```
 
-# Number of peaks per cutoff - broad peakcalling
-
+# Number of peaks per bed - semi-supervised 
 ```{python include = FALSE}
 import pandas as pd
-df = pd.DataFrame({"FDR cutoff" : [0.1,0.05,0.01],
-                  "# of Peaks" : [74783,12314,12312]
+df = pd.DataFrame({"Type" : ["MACS3","SPAN before merging","SPAN after merging"],
+                  "# of Peaks" : [67497,39068,11944]
 })
 print(df.to_markdown(index = False))
+
+#about 13000 less peaks in 0.01 but many of these are small peaks
+#The IDR algorithm requires sampling of both signal and noise distributions to separate the peaks into two groups, so having a more liberal threshold allows us to bring in some noise.
 ```
 
 ```{r echo = FALSE}
 kable(py$df)
 ```
+
+# Peaks annotation
+
+```{r include = FALSE}
+#load data
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+samplefiles <- list.files("~/Documents/K36me2_enhancer", pattern= "merged_final.bed", full.names=T)
+samplefiles <- as.list(samplefiles)
+names(samplefiles) <- c("TKO_K36me2")
+peakAnnolist <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
+plotAnnoBar(peakAnnolist)
+annot_df <- peakAnnolist[["TKO_K36me2"]]@anno %>% as.data.frame()
+```
+
+```{r include = FALSE}
+peakAnnolist[["TKO_K36me2"]]@annoStat %>% reactable()
+```
+
+Most of the peaks are found in promoters (35%) and distal intergenic regions (26%).
+```{r include = FALSE}
+#load data
+options(ChIPseeker.ignore_1st_exon = TRUE)
+options(ChIPseeker.ignore_1st_intron = TRUE)
+options(ChIPseeker.ignore_downstream = TRUE)
+options(ChIPseeker.ignore_promoter_subcategory = TRUE)
+peakAnnolist_V2 <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
+```
+
+```{r echo = FALSE,warning=FALSE,message=FALSE,out.width='100%'}
+plotAnnoBar(peakAnnolist_V2)
+peakAnnolist_V2[["TKO_K36me2"]]@annoStat %>% reactable()
+```
+
+# Distance to TSS
+
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%'}
+plotDistToTSS(peakAnnolist_V2)
+```
+
+```{r include = FALSE}
+enhancer_bed <- fread("~/Documents/K36me2_enhancer/K36me2.enhancer.bed") %>%
+  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
+#number of peaks with at least 1 hit in enhancer.bed (at least one enhancer overlaps with peak)
+promoter_bed <- fread("~/Documents/K36me2_enhancer/K36me2.promoter.bed") %>%
+  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
+intergenic_bed <- fread("~/Documents/K36me2_enhancer/K36me2.intergenic.bed") %>%
+  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
+exon_bed <- fread("~/Documents/K36me2_enhancer/K36me2.exon.bed") %>%
+  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
+intron_bed <- fread("~/Documents/K36me2_enhancer/K36me2.intron.bed") %>%
+  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
+####
+original_enhancer_bed <- fread("~/Documents/K36me2_enhancer/enhancer.bed")
+merged_bed <- fread("merged_final.bed")
+###################
+count_annot <- function(x){
+  count <- (nrow(x[x$hits >= 1,])/nrow(x))*100
+  return(count)
+}
+# Minimum overlap required as a fraction of B. Default is 1E-9 (i.e., 1bp). genomic region must be 100% within the peak to be considered a hit
+# feature in genomic region overlaps at least 100% of the peaks 
+#candidate cis-Regulatory Elements (cCREs) 
+
+#hypothesis: between these double peaks are enhancer elements 
+#assumptions: from an analysis point of view: peak calling is done right, based on previously described enhancer elements
+#from an experiment point of view: quality of antibody, lacking replicates
+
+#TO DO
+#classify enhancer as close to promoter
+#not close to promoter or gene
+#enhancer in gene body or transcription start site
+
+```
+
+# Promoter aggregation plots & heatmaps {.tabset}
+
+## Aggregation plot
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.promoter.profile.png",dpi=600)
+```
+
+## Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.promoter.heatmap.png",dpi=600)
+```
+
+# 

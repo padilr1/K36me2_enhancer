@@ -1,6 +1,6 @@
 name: ""
 navbar:
-  title: "HNSCC ChIP-seq"
+  title: "K36me2 in TKO/QKO"
   left:
     - text: "Exploratory"
       href: index.html
