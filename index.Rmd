@@ -115,9 +115,9 @@ count_annot <- function(x){
 
 ```
 
-# Promoter aggregation plots & heatmaps {.tabset}
+# Promoter {.tabset}
 
-## Aggregation plot
+## Plot
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.promoter.profile.png",dpi=600)
 ```
@@ -127,4 +127,29 @@ include_graphics("images/K36me2.promoter.profile.png",dpi=600)
 include_graphics("images/K36me2.promoter.heatmap.png",dpi=600)
 ```
 
-# 
+# Enhancer {.tabset}
+
+## Plot
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.enhancer.profile.png",dpi=600)
+```
+
+## Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.enhancer.heatmap.png",dpi=600)
+```
+
+# TSS {.tabset}
+
+Using that matrix we can create a profile plot which is essentially a density plot that evaluates read density across all transcription start sites. We can see that TKO has a particularly higher amount of signal at the TSS compared to other samples.
+
+## Plot
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.TSS.profile.png",dpi=600)
+```
+
+## Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2.TSS.heatmap.png",dpi=600)
+```
+
