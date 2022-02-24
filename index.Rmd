@@ -118,14 +118,14 @@ count_annot <- function(x){
 # Promoter {.tabset}
 
 ## Plot
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.promoter.profile.png",dpi=600)
 include_graphics("images/K36me3.promoter.profile.png",dpi=600)
 include_graphics("images/K27ac.promoter.profile.png",dpi=600)
 ```
 
 ## Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.promoter.heatmap.png",dpi=600)
 include_graphics("images/K36me3.promoter.heatmap.png",dpi=600)
 include_graphics("images/K27ac.promoter.heatmap.png",dpi=600)
@@ -134,14 +134,14 @@ include_graphics("images/K27ac.promoter.heatmap.png",dpi=600)
 # Enhancer {.tabset}
 
 ## Plot
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.enhancer.profile.png",dpi=600)
 include_graphics("images/K36me3.enhancer.profile.png",dpi=600)
 include_graphics("images/K27ac.enhancer.profile.png",dpi=600)
 ```
 
 ## Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.enhancer.heatmap.png",dpi=600)
 include_graphics("images/K36me3.enhancer.heatmap.png",dpi=600)
 include_graphics("images/K27ac.enhancer.heatmap.png",dpi=600)
@@ -150,7 +150,7 @@ include_graphics("images/K27ac.enhancer.heatmap.png",dpi=600)
 # TSS {.tabset}
 
 ## Plot
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.TSS.profile.png",dpi=600)
 include_graphics("images/K36me3.TSS.profile.png",dpi=600)
 include_graphics("images/K27ac.TSS.profile.png",dpi=600)
@@ -158,13 +158,13 @@ include_graphics("images/K27ac.TSS.profile.png",dpi=600)
 ```
 
 ## Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2.TSS.heatmap.png",dpi=600)
 include_graphics("images/K36me3.TSS.heatmap.png",dpi=600)
 include_graphics("images/K27ac.TSS.heatmap.png",dpi=600)
 ```
 
-# ATACseq
+# PA-ATACseq
 
 ```{r include=FALSE}
 #load data
@@ -185,14 +185,14 @@ plotAnnoBar(peakAnnolist)
 ## ATACseq {.tabset}
 
 ### Plots
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/ATACseq_ATAC.promoter.profile.png",dpi=600)
 include_graphics("images/ATACseq_ATAC.intron.profile.png",dpi=600)
 include_graphics("images/ATACseq_ATAC.intergenic.profile.png",dpi=600)
 ```
 
 ### Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/ATACseq_ATAC.promoter.heatmap.png",dpi=600)
 include_graphics("images/ATACseq_ATAC.intron.heatmap.png",dpi=600)
 include_graphics("images/ATACseq_ATAC.intergenic.heatmap.png",dpi=600)
@@ -201,14 +201,14 @@ include_graphics("images/ATACseq_ATAC.intergenic.heatmap.png",dpi=600)
 ## K27ac {.tabset}
 
 ### Plots
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K27ac_ATAC.promoter.profile.png",dpi=600)
 include_graphics("images/K27ac_ATAC.intron.profile.png",dpi=600)
 include_graphics("images/K27ac_ATAC.intergenic.profile.png",dpi=600)
 ```
 
 ### Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K27ac_ATAC.promoter.heatmap.png",dpi=600)
 include_graphics("images/K27ac_ATAC.intron.heatmap.png",dpi=600)
 include_graphics("images/K27ac_ATAC.intergenic.heatmap.png",dpi=600)
@@ -217,21 +217,46 @@ include_graphics("images/K27ac_ATAC.intergenic.heatmap.png",dpi=600)
 ## K36me2 {.tabset}
 
 ### Plots
-
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2_ATAC.promoter.profile.png",dpi=600)
 include_graphics("images/K36me2_ATAC.intron.profile.png",dpi=600)
 include_graphics("images/K36me2_ATAC.intergenic.profile.png",dpi=600)
 ```
 
 ### Heatmap
-```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
 include_graphics("images/K36me2_ATAC.promoter.heatmap.png",dpi=600)
 include_graphics("images/K36me2_ATAC.intron.heatmap.png",dpi=600)
 include_graphics("images/K36me2_ATAC.intergenic.heatmap.png",dpi=600)
 ```
 
-## K4me1
+## K4me1 {.tabset}
 
-## K4me3
+### Plots
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics(c("images/K4me1_ATAC.promoter.profile.png","images/K4me1_ATAC.intron.profile.png","images/K4me1_ATAC.intergenic.profile.png"),dpi=600)
+#include_graphics("images/K4me1_ATAC.intron.profile.png",dpi=600)
+#include_graphics("images/K4me1_ATAC.intergenic.profile.png",dpi=600)
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics("images/K4me1_ATAC.promoter.heatmap.png",dpi=600)
+include_graphics("images/K4me1_ATAC.intron.heatmap.png",dpi=600)
+include_graphics("images/K4me1_ATAC.intergenic.heatmap.png",dpi=600)
+```
+
+## K4me3 {.tabset}
+
+### Plots
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics("images/K4me3_ATAC.promoter.profile.png",dpi=600)
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+include_graphics("images/K4me3_ATAC.promoter.heatmap.png",dpi=600)
+```
+
+Currently lacking K4me1 and K4me3 ChIPseq for TKO & SETD2KO.
 
