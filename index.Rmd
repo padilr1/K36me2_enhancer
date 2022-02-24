@@ -24,6 +24,12 @@ library(org.Mm.eg.db)
 library(dplyr)
 library(reactable)
 library(data.table)
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+options(ChIPseeker.ignore_1st_exon = TRUE)
+options(ChIPseeker.ignore_1st_intron = TRUE)
+options(ChIPseeker.ignore_downstream = TRUE)
+options(ChIPseeker.ignore_promoter_subcategory = TRUE)
+setwd("~/Documents/K36me2_enhancer")
 ```
 
 # Number of peaks per bed - semi-supervised 
@@ -46,7 +52,6 @@ kable(py$df)
 
 ```{r include = FALSE}
 #load data
-txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
 samplefiles <- list.files("~/Documents/K36me2_enhancer", pattern= "merged_final.bed", full.names=T)
 samplefiles <- as.list(samplefiles)
 names(samplefiles) <- c("TKO_K36me2")
@@ -61,11 +66,6 @@ peakAnnolist[["TKO_K36me2"]]@annoStat %>% reactable()
 
 Most of the peaks are found in promoters (35%) and distal intergenic regions (26%).
 ```{r include = FALSE}
-#load data
-options(ChIPseeker.ignore_1st_exon = TRUE)
-options(ChIPseeker.ignore_1st_intron = TRUE)
-options(ChIPseeker.ignore_downstream = TRUE)
-options(ChIPseeker.ignore_promoter_subcategory = TRUE)
 peakAnnolist_V2 <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
 ```
 
@@ -120,11 +120,15 @@ count_annot <- function(x){
 ## Plot
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.promoter.profile.png",dpi=600)
+include_graphics("images/K36me3.promoter.profile.png",dpi=600)
+include_graphics("images/K27ac.promoter.profile.png",dpi=600)
 ```
 
 ## Heatmap
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.promoter.heatmap.png",dpi=600)
+include_graphics("images/K36me3.promoter.heatmap.png",dpi=600)
+include_graphics("images/K27ac.promoter.heatmap.png",dpi=600)
 ```
 
 # Enhancer {.tabset}
@@ -132,24 +136,102 @@ include_graphics("images/K36me2.promoter.heatmap.png",dpi=600)
 ## Plot
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.enhancer.profile.png",dpi=600)
+include_graphics("images/K36me3.enhancer.profile.png",dpi=600)
+include_graphics("images/K27ac.enhancer.profile.png",dpi=600)
 ```
 
 ## Heatmap
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.enhancer.heatmap.png",dpi=600)
+include_graphics("images/K36me3.enhancer.heatmap.png",dpi=600)
+include_graphics("images/K27ac.enhancer.heatmap.png",dpi=600)
 ```
 
 # TSS {.tabset}
 
-Using that matrix we can create a profile plot which is essentially a density plot that evaluates read density across all transcription start sites. We can see that TKO has a particularly higher amount of signal at the TSS compared to other samples.
-
 ## Plot
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.TSS.profile.png",dpi=600)
+include_graphics("images/K36me3.TSS.profile.png",dpi=600)
+include_graphics("images/K27ac.TSS.profile.png",dpi=600)
+#Using that matrix we can create a profile plot which is essentially a density plot that evaluates read density across all transcription start sites. We can see that TKO has a particularly higher amount of signal at the TSS compared to other samples.
 ```
 
 ## Heatmap
 ```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
 include_graphics("images/K36me2.TSS.heatmap.png",dpi=600)
+include_graphics("images/K36me3.TSS.heatmap.png",dpi=600)
+include_graphics("images/K27ac.TSS.heatmap.png",dpi=600)
 ```
+
+# ATACseq
+
+```{r include=FALSE}
+#load data
+samplefiles <- list.files("~/Documents/K36me2_enhancer/ATACseq", pattern= "_peaks.bed", full.names=T)
+samplefiles <- as.list(samplefiles)
+names(samplefiles) <- c("K36M_ATAC","NSD12DKO_ATAC","PA_ATAC","SETD2KO_ATAC")
+peakAnnolist <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
+#plotAnnoBar(peakAnnolist)
+# rearrange 
+#peakAnnolist[["SETD2KO_ATAC"]]@anno %>% as.data.frame() %>% write.csv(file = "~/Documents/K36me2_enhancer/ATACseq/setd2ko_atac.csv")
+#invisible(lapply(names(peakAnnolist),function(x) assign(x,peakAnnolist[[x]] %>% as.data.frame() %>% write.csv(paste0(x,".csv")),.GlobalEnv)))
+```
+
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%'}
+plotAnnoBar(peakAnnolist)
+```
+
+## ATACseq {.tabset}
+
+### Plots
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/ATACseq_ATAC.promoter.profile.png",dpi=600)
+include_graphics("images/ATACseq_ATAC.intron.profile.png",dpi=600)
+include_graphics("images/ATACseq_ATAC.intergenic.profile.png",dpi=600)
+```
+
+### Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/ATACseq_ATAC.promoter.heatmap.png",dpi=600)
+include_graphics("images/ATACseq_ATAC.intron.heatmap.png",dpi=600)
+include_graphics("images/ATACseq_ATAC.intergenic.heatmap.png",dpi=600)
+```
+
+## K27ac {.tabset}
+
+### Plots
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K27ac_ATAC.promoter.profile.png",dpi=600)
+include_graphics("images/K27ac_ATAC.intron.profile.png",dpi=600)
+include_graphics("images/K27ac_ATAC.intergenic.profile.png",dpi=600)
+```
+
+### Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K27ac_ATAC.promoter.heatmap.png",dpi=600)
+include_graphics("images/K27ac_ATAC.intron.heatmap.png",dpi=600)
+include_graphics("images/K27ac_ATAC.intergenic.heatmap.png",dpi=600)
+```
+
+## K36me2 {.tabset}
+
+### Plots
+
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2_ATAC.promoter.profile.png",dpi=600)
+include_graphics("images/K36me2_ATAC.intron.profile.png",dpi=600)
+include_graphics("images/K36me2_ATAC.intergenic.profile.png",dpi=600)
+```
+
+### Heatmap
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%', dpi = 600,fig.retina=2}
+include_graphics("images/K36me2_ATAC.promoter.heatmap.png",dpi=600)
+include_graphics("images/K36me2_ATAC.intron.heatmap.png",dpi=600)
+include_graphics("images/K36me2_ATAC.intergenic.heatmap.png",dpi=600)
+```
+
+## K4me1
+
+## K4me3
 

@@ -371,8 +371,8 @@ div.tocify {
 <h1>Peaks annotation</h1>
 <p>Most of the peaks are found in promoters (35%) and distal intergenic regions (26%).</p>
 <p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="100%" /></p>
-<div id="htmlwidget-a3fa1a8f739d26cb0a8d" class="reactable html-widget" style="width:auto;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a3fa1a8f739d26cb0a8d">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Feature":["Promoter","5' UTR","3' UTR","Exon","Intron","Intergenic"],"Frequency":[34.6868720696584,1.10515740120563,3.60850636302746,11.9390488948426,21.6008037508372,27.0596115204287]},"columns":[{"accessor":"Feature","name":"Feature","type":"factor"},{"accessor":"Frequency","name":"Frequency","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"32cd5bfd65c8f23f39777b532b8eb9a2","key":"32cd5bfd65c8f23f39777b532b8eb9a2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-75a583ea05385195ffa4" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-75a583ea05385195ffa4">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"Feature":["Promoter","5' UTR","3' UTR","Exon","Intron","Intergenic"],"Frequency":[34.6868720696584,1.10515740120563,3.60850636302746,11.9390488948426,21.6008037508372,27.0596115204287]},"columns":[{"accessor":"Feature","name":"Feature","type":"factor"},{"accessor":"Frequency","name":"Frequency","type":"numeric"}],"defaultPageSize":10,"paginationType":"numbers","showPageInfo":true,"minRows":1,"dataKey":"32cd5bfd65c8f23f39777b532b8eb9a2","key":"32cd5bfd65c8f23f39777b532b8eb9a2"},"children":[]},"class":"reactR_markup"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div id="distance-to-tss" class="section level1">
 <h1>Distance to TSS</h1>
@@ -382,34 +382,54 @@ div.tocify {
 <h1 class="tabset">Promoter</h1>
 <div id="plot" class="section level2">
 <h2>Plot</h2>
-<p><img src="images/K36me2.promoter.profile.png" width="100%" /></p>
+<p><img src="images/K36me2.promoter.profile.png" width="100%" /><img src="images/K36me3.promoter.profile.png" width="100%" /><img src="images/K27ac.promoter.profile.png" width="100%" /></p>
 </div>
 <div id="heatmap" class="section level2">
 <h2>Heatmap</h2>
-<p><img src="images/K36me2.promoter.heatmap.png" width="100%" /></p>
+<p><img src="images/K36me2.promoter.heatmap.png" width="100%" /><img src="images/K36me3.promoter.heatmap.png" width="100%" /><img src="images/K27ac.promoter.heatmap.png" width="100%" /></p>
 </div>
 </div>
 <div id="enhancer" class="section level1 tabset">
 <h1 class="tabset">Enhancer</h1>
 <div id="plot-1" class="section level2">
 <h2>Plot</h2>
-<p><img src="images/K36me2.enhancer.profile.png" width="100%" /></p>
+<p><img src="images/K36me2.enhancer.profile.png" width="100%" /><img src="images/K27ac.enhancer.profile.png" width="100%" /></p>
 </div>
 <div id="heatmap-1" class="section level2">
 <h2>Heatmap</h2>
-<p><img src="images/K36me2.enhancer.heatmap.png" width="100%" /></p>
+<p><img src="images/K36me2.enhancer.heatmap.png" width="100%" /><img src="images/K27ac.enhancer.heatmap.png" width="100%" /></p>
 </div>
 </div>
 <div id="tss" class="section level1 tabset">
 <h1 class="tabset">TSS</h1>
-<p>Using that matrix we can create a profile plot which is essentially a density plot that evaluates read density across all transcription start sites. We can see that TKO has a particularly higher amount of signal at the TSS compared to other samples.</p>
 <div id="plot-2" class="section level2">
 <h2>Plot</h2>
-<p><img src="images/K36me2.TSS.profile.png" width="100%" /></p>
+<p><img src="images/K36me2.TSS.profile.png" width="100%" /><img src="images/K36me3.TSS.profile.png" width="100%" /><img src="images/K27ac.TSS.profile.png" width="100%" /></p>
 </div>
 <div id="heatmap-2" class="section level2">
 <h2>Heatmap</h2>
-<p><img src="images/K36me2.TSS.heatmap.png" width="100%" /></p>
+<p><img src="images/K36me2.TSS.heatmap.png" width="100%" /><img src="images/K36me3.TSS.heatmap.png" width="100%" /><img src="images/K27ac.TSS.heatmap.png" width="100%" /></p>
+</div>
+</div>
+<div id="atacseq" class="section level1">
+<h1>ATACseq</h1>
+<p><img src="index_files/figure-html/unnamed-chunk-16-1.png" width="100%" /></p>
+<div id="k27ac" class="section level2 tabset">
+<h2 class="tabset">K27ac</h2>
+<div id="plots" class="section level3">
+<h3>Plots</h3>
+<p><img src="images/K27ac_ATAC.promoter.profile.png" width="100%" /><img src="images/K27ac_ATAC.intron.profile.png" width="100%" /><img src="images/K27ac_ATAC.intergenic.profile.png" width="100%" /></p>
+</div>
+<div id="heatmap-3" class="section level3">
+<h3>Heatmap</h3>
+<p><img src="images/K27ac_ATAC.promoter.heatmap.png" width="100%" /><img src="images/K27ac_ATAC.intron.heatmap.png" width="100%" /><img src="images/K27ac_ATAC.intergenic.heatmap.png" width="100%" /></p>
+</div>
+</div>
+<div id="k4me1" class="section level2">
+<h2>K4me1</h2>
+</div>
+<div id="k4me3" class="section level2">
+<h2>K4me3</h2>
 </div>
 </div>
 
