@@ -57,7 +57,8 @@ samplefiles <- as.list(samplefiles)
 names(samplefiles) <- c("TKO_K36me2")
 peakAnnolist <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
 plotAnnoBar(peakAnnolist)
-annot_df <- peakAnnolist[["TKO_K36me2"]]@anno %>% as.data.frame()
+#annot_df <- peakAnnolist[["TKO_K36me2"]]@anno %>% as.data.frame()
+#write.csv(annot_df,file="TKO_K36me2.csv")
 ```
 
 ```{r include = FALSE}

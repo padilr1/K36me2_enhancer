@@ -4,4 +4,6 @@ navbar:
   left:
     - text: "Exploratory"
       href: index.html
+    - text: "Part 2"
+      href: second_page.html
 output_dir: "docs"

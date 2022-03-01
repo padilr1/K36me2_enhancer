@@ -1,0 +1,118 @@
+---
+title: "rough"
+author: "Reinnier Padilla"
+date: "01/03/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## ATACseq {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "ATAC.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "ATAC.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+## K27ac {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K27ac.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K27ac.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+## K9me3 {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K9me3.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K9me3.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+## K36me2 {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K36me2.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K36me2.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+## K36me3 {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K36me3.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K36me3.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+## K27me3 {.tabset}
+
+### Plot
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K27me3.enhancer.*.profile.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```
+
+### Heatmap
+```{r echo = FALSE, fig.show = "hold", out.width = "50%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "H3K27me3.enhancer.*.heatmap.png$", full.names=T)
+for (x in imageList){
+  print(include_graphics(x, dpi = 600))
+}
+```

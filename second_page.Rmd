@@ -1,0 +1,161 @@
+---
+title: ""
+author: ""
+date: ""
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    collapsed: false
+    number_sections: false
+    toc_depth: 3
+    smooth_scroll: false
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(reticulate)
+library(knitr)
+library(ChIPseeker)
+library(AnnotationDbi)
+library(TxDb.Mmusculus.UCSC.mm10.knownGene)
+library(org.Mm.eg.db)
+library(dplyr)
+library(reactable)
+library(data.table)
+library(png)
+txdb <- TxDb.Mmusculus.UCSC.mm10.knownGene
+options(ChIPseeker.ignore_1st_exon = TRUE)
+options(ChIPseeker.ignore_1st_intron = TRUE)
+options(ChIPseeker.ignore_downstream = TRUE)
+options(ChIPseeker.ignore_promoter_subcategory = TRUE)
+setwd("~/Documents/K36me2_enhancer")
+```
+
+# Number of ATACseq peaks
+```{python include = FALSE}
+import pandas as pd
+df = pd.DataFrame(
+                  [[8086,39294,9,4610,19742,2787,4143,7002],
+                  [4499,29258,4,1161,8278,37187,2580,4499],
+                  [4296,25347,9,1139,7352,21508,3157,4296]
+                  ],
+                  index=["Promoter","Intron","Intergenic"],
+                  columns=["K36M_ATAC","Union_ATAC","IntersectATAC(100% overlap)","IntersectATAC(90% overlap)","IntersectATAC(50% overlap)","enhancer","TKO_K36me2","TKO_K36me2_ATAC"]
+)
+print(df.to_markdown(index = False))
+#about 13000 less peaks in 0.01 but many of these are small peaks
+#The IDR algorithm requires sampling of both signal and noise distributions to separate the peaks into two groups, so having a more liberal threshold allows us to bring in some noise.
+```
+
+```{r echo = FALSE,fig.cap="Overlap value = if -f & -F is 0.90, this requires that B overlap at least 90% of A and that A also overlaps at least 90% of B."}
+kable(py$df)
+```
+
+# Enhancer distribution
+
+69094 total peaks for enhancers
+```{r include=FALSE}
+#load data
+samplefiles <- list.files("~/Documents/K36me2_enhancer", pattern= "enhancer.bed", full.names=T)
+samplefiles <- as.list(samplefiles)
+names(samplefiles) <- c("enhancer")
+peakAnnolist <- lapply(samplefiles,annotatePeak,TxDb = txdb,tssRegion = c(-1000, 1000))
+#plotAnnoBar(peakAnnolist)
+# rearrange 
+#peakAnnolist[["SETD2KO_ATAC"]]@anno %>% as.data.frame() %>% write.csv(file = "~/Documents/K36me2_enhancer/ATACseq/setd2ko_atac.csv")
+#invisible(lapply(names(peakAnnolist),function(x) assign(x,peakAnnolist[[x]] %>% as.data.frame() %>% write.csv(paste0(x,".csv")),.GlobalEnv)))
+```
+
+```{r echo = FALSE, warning=FALSE,message=FALSE,out.width='100%'}
+plotAnnoBar(peakAnnolist)
+#anno_df <- peakAnnolist[["enhancer"]]@anno %>% as.data.frame()
+#write.csv(anno_df,file="enhancer.csv")
+```
+
+# Graphs
+
+## ATACseq {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^ATAC.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^ATAC.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+## K27ac {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K27ac.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K27ac.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+## K36me2 {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K36me2.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K36me2.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+## K36me3 {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K36me3.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K36me3.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+## K27me3 {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K27me3.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K27me3.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+## K9me3 {.tabset}
+
+### Plots
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K9me3.*.*.profile.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
+
+### Heatmap
+```{r,echo = FALSE,fig.show = "hold", out.width = "33%", fig.align = "default"}
+imageList <- list.files("~/Documents/K36me2_enhancer/images", pattern= "^H3K9me3.*.*.heatmap.png$", full.names=T)
+include_graphics(imageList,dpi = 600)
+```
