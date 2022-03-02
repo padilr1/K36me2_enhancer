@@ -81,41 +81,6 @@ peakAnnolist_V2[["TKO_K36me2"]]@annoStat %>% reactable()
 plotDistToTSS(peakAnnolist_V2)
 ```
 
-```{r include = FALSE}
-enhancer_bed <- fread("~/Documents/K36me2_enhancer/K36me2.enhancer.bed") %>%
-  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
-#number of peaks with at least 1 hit in enhancer.bed (at least one enhancer overlaps with peak)
-promoter_bed <- fread("~/Documents/K36me2_enhancer/K36me2.promoter.bed") %>%
-  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
-intergenic_bed <- fread("~/Documents/K36me2_enhancer/K36me2.intergenic.bed") %>%
-  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
-exon_bed <- fread("~/Documents/K36me2_enhancer/K36me2.exon.bed") %>%
-  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
-intron_bed <- fread("~/Documents/K36me2_enhancer/K36me2.intron.bed") %>%
-  setNames(c("chr","chrStart","chrEnd","peak_id","hits"))
-####
-original_enhancer_bed <- fread("~/Documents/K36me2_enhancer/enhancer.bed")
-merged_bed <- fread("merged_final.bed")
-###################
-count_annot <- function(x){
-  count <- (nrow(x[x$hits >= 1,])/nrow(x))*100
-  return(count)
-}
-# Minimum overlap required as a fraction of B. Default is 1E-9 (i.e., 1bp). genomic region must be 100% within the peak to be considered a hit
-# feature in genomic region overlaps at least 100% of the peaks 
-#candidate cis-Regulatory Elements (cCREs) 
-
-#hypothesis: between these double peaks are enhancer elements 
-#assumptions: from an analysis point of view: peak calling is done right, based on previously described enhancer elements
-#from an experiment point of view: quality of antibody, lacking replicates
-
-#TO DO
-#classify enhancer as close to promoter
-#not close to promoter or gene
-#enhancer in gene body or transcription start site
-
-```
-
 # Promoter {.tabset}
 
 ## Plot
